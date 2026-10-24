@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+
+# Runtime state / logs (never publish quarantine state, audit logs or your whitelist)
+logs/
+state.json
+config.json
+*.tmp
+
+# OS junk
+Thumbs.db
+Desktop.ini
+
+# Local notes
+.workbuddy/

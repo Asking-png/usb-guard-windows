@@ -1,0 +1,21 @@
+{
+  "enabled": true,
+  "dry_run": false,
+  "only_usb_bus": true,
+  "require_terms": true,
+  "require_auth_code": false,
+  "auth_code_hash": "",
+  "auth_code_hint": "请输入授权口令（默认未启用，可用 --set-code 设置）",
+  "timeout_seconds": 120,
+  "on_timeout": "deny",
+  "on_deny": "keep_quarantined",
+  "strict_mode": true,
+  "auto_open_folder_after_approve": true,
+  "poll_interval_ms": 800,
+  "default_access_mode": "full",
+  "file_audit": true,
+  "terms_file": "terms.txt",
+  "log_file": "logs/audit.log",
+  "handle_existing_on_start": true,
+  "whitelist": []
+}
