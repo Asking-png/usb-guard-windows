@@ -5,7 +5,7 @@
   "require_terms": true,
   "require_auth_code": false,
   "auth_code_hash": "",
-  "auth_code_hint": "请输入授权口令（默认未启用，可用 --set-code 设置）",
+  "auth_code_hint": "请输入授权口令（默认未启用，可用 Baize.exe --set-code 设置）",
   "timeout_seconds": 120,
   "on_timeout": "deny",
   "on_deny": "keep_quarantined",
@@ -17,5 +17,8 @@
   "terms_file": "terms.txt",
   "log_file": "logs/audit.log",
   "handle_existing_on_start": true,
-  "whitelist": []
+  "whitelist": [],
+  "protect_all_usb": true,
+  "protect_input_devices": false,
+  "theme": "auto"
 }

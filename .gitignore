@@ -14,3 +14,9 @@ Desktop.ini
 
 # Local notes
 .workbuddy/
+
+# Build artifacts —— 绝不入库：exe 体积大且一定过期，spec 每次打包自动重写
+build/
+dist/
+*.spec
+*.zip
