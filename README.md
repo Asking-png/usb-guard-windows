@@ -149,6 +149,11 @@ This is a **user-mode** tool. The honest limits:
   Together with `--harden`, the worst case inside that window is "readable", never "writable".
 - **No protection before logon** — the approval UI needs a desktop, so the guard starts about
   20 s after sign-in.
+- **Only what arrives *after* it starts is gated.** The guard watches for volume and device-tree
+  changes. A USB drive already plugged in at launch is still caught by the first scan and
+  quarantined as usual; non-storage devices already present (webcam, NIC, printer) are only
+  recorded into a baseline and left untouched — disabling them at startup would also take out
+  the keyboard you are typing on. Re-plug such a device to send it through approval.
 - **Cannot withstand an administrator**, and cannot withstand offline attacks (booting another
   OS or a PE environment). No user-mode program can.
 - **Not a BadUSB defence.** A device that enumerates as a keyboard is an input device; the
