@@ -1,0 +1,14 @@
+# 统一换行符，避免 Windows 用户签出后 .bat 因 LF 而标签跳转失效
+* text=auto
+
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+
+*.py   text eol=lf
+*.md   text eol=lf
+*.json text eol=lf
+.gitignore    text eol=lf
+.gitattributes text eol=lf
+
+*.png binary
+*.ico binary

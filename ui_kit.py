@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """白泽 · 界面组件库（纯 tkinter，无第三方依赖）
 
-设计语言对齐 WorkBuddy：
-  · 中性灰阶为主，极细描边（6%~14% 透明黑/白）
-  · 品牌青绿 #00C29A 只做点缀（状态点、图标、勾选），不做大面积填充
+设计语言：
+  · 中性灰阶为主，极细描边（6%~14% 的黑/白，按明度叠底后取实色）
+  · 强调色青绿 #00C29A 只做点缀（状态点、图标、勾选），不做大面积填充
   · 主按钮近黑（浅色）/ 青绿（深色），次要按钮白底细边
   · 卡片 12px 圆角，按钮 8px，勾选框 4px；阴影极淡
 
@@ -43,22 +43,24 @@ def P(n):
 
 
 # ---------------------------------------------------------------- 配色令牌
-# 取值来自 WorkBuddy 的 tokens.css（--wb-* 语义令牌），不是凭感觉调的。
+# 两套主题各定义一组语义色，界面代码只引用语义名，不直接写色值。
+# 取值按「中性灰底 + 白卡片 + 单一强调色」组织：底色与卡片靠明度拉开层次，
+# 描边只用极低对比度的一档，强调色仅出现在主操作与状态标识上。
 # 注意：tkinter 不认 8 位 #RRGGBBAA，半透明描边/文字都按「叠在窗口底上」换算成了实色。
 _THEMES = {
     "light": {
-        "BG":       "#F2F2F2",   # 窗口底（--wb-home-bg-primary）
-        "SURFACE":  "#FFFFFF",   # 内容面（--wb-bg-content）
-        "CARD":     "#FFFFFF",   # 卡片（--wb-bg-card）
-        "CARD_2":   "#F5F5F5",   # 内嵌区 / 输入框（--wb-bg-card-strong）
+        "BG":       "#F2F2F2",   # 窗口底色
+        "SURFACE":  "#FFFFFF",   # 内容面
+        "CARD":     "#FFFFFF",   # 卡片
+        "CARD_2":   "#F5F5F5",   # 内嵌区 / 输入框
         "CARD_3":   "#FAFAFA",
         "LINE":     "#E6E6E6",   # 描边≈8% 黑叠底后的实色
         "LINE_2":   "#EFEFEF",   # 更淡的分隔线
-        "TXT":      "#000000",   # 主文字（--wb-color-text-primary）
+        "TXT":      "#000000",   # 主文字
         "SUB":      "#595959",   # 次文字 65%
         "MUTED":    "#7A7A7A",   # 弱文字 50%
-        "ACCENT":   "#00C29A",   # 品牌青绿（--wb-palette-brand-8）
-        "ACCENT_2": "#009273",   # 深一档（brand-9）
+        "ACCENT":   "#00C29A",   # 强调色：青绿
+        "ACCENT_2": "#009273",   # 强调色深一档
         "ACCENT_SOFT": "#E6FAF5",# 青绿淡底
         "OK":       "#0CBF5B",
         "DANGER":   "#F64041",
@@ -68,17 +70,17 @@ _THEMES = {
         "DARK_TITLEBAR": False,
     },
     "dark": {
-        "BG":       "#1F1F1F",   # --wb-palette-gray-3
+        "BG":       "#1F1F1F",   # 窗口底色
         "SURFACE":  "#1A1A1A",
-        "CARD":     "#242424",   # --wb-bg-card
-        "CARD_2":   "#262626",   # --wb-bg-inset-strong
+        "CARD":     "#242424",   # 卡片
+        "CARD_2":   "#262626",   # 内嵌区 / 输入框
         "CARD_3":   "#2A2A2A",
         "LINE":     "#3A3A3A",   # 描边≈14% 白叠底后的实色
         "LINE_2":   "#2E2E2E",
         "TXT":      "#FFFFFF",
         "SUB":      "#A6A6A6",
         "MUTED":    "#858585",
-        "ACCENT":   "#22CBA8",   # --wb-palette-brand-7
+        "ACCENT":   "#22CBA8",   # 强调色：青绿（深底上提亮）
         "ACCENT_2": "#4CF0CE",
         "ACCENT_SOFT": "#0E2520",
         "OK":       "#24C46C",
@@ -93,7 +95,7 @@ _THEMES = {
 # 按钮配色表：(基础, 悬停, 按下, 文字)
 _BUTTONS = {
     "light": {
-        # 浅色主题下主按钮＝近黑，和 WorkBuddy 的发送/确认按钮一致
+        # 浅色主题下主按钮用近黑实心，比彩色按钮更克制，也不与强调色抢视觉
         "primary": ("#1A1A1A", "#333333", "#000000", "#FFFFFF"),
         "success": ("#00C29A", "#22CBA8", "#009273", "#00312A"),
         "danger":  ("#F64041", "#FF5C5D", "#B42C3F", "#FFFFFF"),
