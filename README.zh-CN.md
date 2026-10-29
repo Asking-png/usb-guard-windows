@@ -90,7 +90,7 @@ python smoke_test.py                :: 冒烟测试，不需要管理员
 
 ## 配置
 
-把 `config.example.json` 复制成 `config.json` 使用；首次运行也会自动生成一份默认配置。
+首次运行会按 `config.example.json` 自动生成 `config.json`，不需要手动复制。
 
 | 配置项 | 默认值 | 含义 |
 |---|---|---|
@@ -163,9 +163,14 @@ WM_DEVICECHANGE (DBT_DEVNODES_CHANGED)
 | `_find-python.cmd` | 各 `.bat` 共用的 Python 探测逻辑 |
 | `guard-background.cmd` | 计划任务用的无控制台启动脚本 |
 | `smoke_test.py` | 免管理员的冒烟测试 |
+| `设置开机自启.cmd` | 一次点击登记开机自启的计划任务 |
+| `一键放行被锁的U盘.cmd` | 盘被上次崩溃锁住时一键放行 |
+| `使用说明.txt` | 面向非技术用户的上手说明 |
+| `terms.video.txt` | 录制演示视频时替换用的须知文本 |
 
 日志在 `logs/audit.log`（JSONL 审计）与 `logs/app.log`。隔离状态存在 `state.json`，
 崩溃后可用 `--remount-all` 恢复。这些文件都不会提交进仓库。
+漏洞上报方式见 `SECURITY.md`，使用边界见 `DISCLAIMER.md`。
 
 ## 打包成独立程序
 

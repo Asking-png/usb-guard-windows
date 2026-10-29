@@ -210,6 +210,23 @@ def load_config() -> dict:
             cfg_text = BUNDLE_CFG.read_text(encoding="utf-8")
         return _clean_config(json.loads(cfg_text))
     if not CONFIG_FILE.exists():
+        # 源码 / 干净克隆：没有 config.json 就拿模板生成一份，否则用户连启动都过不去
+        for tpl in (APP_DIR / "config.example.json", BUNDLE_DIR / "config.example.json"):
+            if not tpl.exists() or tpl == CONFIG_FILE:
+                continue
+            try:
+                cfg_text = tpl.read_text(encoding="utf-8")
+            except OSError:
+                continue
+            try:
+                # newline="\n" 是必须的：默认会把 LF 转成 os.linesep，
+                # 生成的 config.json 就和模板差几十个字节，对不齐
+                with open(CONFIG_FILE, "w", encoding="utf-8", newline="\n") as fh:
+                    fh.write(cfg_text)
+            except OSError as exc:      # 只读目录：能用就行，不落盘
+                log.warning("无法写入 config.json（%s），本次使用模板配置", exc)
+            log.info("未找到 config.json，已按 %s 生成一份", tpl.name)
+            return _clean_config(json.loads(cfg_text))
         raise SystemExit(f"缺少配置文件: {CONFIG_FILE}")
     raw = json.loads(CONFIG_FILE.read_text(encoding="utf-8"))
     cfg = _clean_config(raw)

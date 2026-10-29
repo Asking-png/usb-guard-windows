@@ -97,7 +97,7 @@ python smoke_test.py                :: smoke test, no admin required
 
 ## Configuration
 
-Copy `config.example.json` to `config.json` — the app also writes a default one on first run.
+`config.json` is generated from `config.example.json` on first run — no manual copy needed.
 
 | Key | Default | Meaning |
 |---|---|---|
@@ -174,9 +174,14 @@ they do better.
 | `_find-python.cmd` | shared Python auto-detection used by the `.bat` files |
 | `guard-background.cmd` | no-console launcher used by the scheduled task |
 | `smoke_test.py` | admin-free smoke test |
+| `设置开机自启.cmd` | register the logon scheduled task (one click) |
+| `一键放行被锁的U盘.cmd` | release a drive left locked by a previous crash |
+| `使用说明.txt` | end-user quick guide for non-technical users (Chinese) |
+| `terms.video.txt` | alternate terms text used when recording the demo walkthrough |
 
 Logs go to `logs/audit.log` (JSONL) and `logs/app.log`. Quarantine state lives in `state.json`
 so a crash can be recovered with `--remount-all`. Neither is committed to this repository.
+Vulnerability disclosure is described in `SECURITY.md`; intended use in `DISCLAIMER.md`.
 
 ## Building a standalone binary
 

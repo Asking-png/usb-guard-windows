@@ -1,13 +1,17 @@
-# 统一换行符，避免 Windows 用户签出后 .bat 因 LF 而标签跳转失效
+# 统一换行符：除 Windows 批处理外一律 LF，保证任何人 clone / 下载 zip 得到完全相同的字节
 * text=auto
 
+# cmd.exe 对 LF 结尾的批处理会解析异常（goto :label 失效），必须 CRLF
 *.bat  text eol=crlf
 *.cmd  text eol=crlf
 
+# 其余文本一律 LF，不受 core.autocrlf 影响
 *.py   text eol=lf
 *.md   text eol=lf
 *.json text eol=lf
-.gitignore    text eol=lf
+*.txt  text eol=lf
+LICENSE text eol=lf
+.gitignore     text eol=lf
 .gitattributes text eol=lf
 
 *.png binary
