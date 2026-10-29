@@ -1927,7 +1927,7 @@ def cmd_set_code() -> None:
     cfg["auth_code_hash"] = sha256(code)
     cfg["auth_code_hint"] = "请输入授权口令："
     save_config(cfg)
-    print("授权口令已写入配置（仅保存其 SHA-256 摘要）。")
+    print("授权口令已写入配置（仅保存其摘要，SHA-2 系列 256 位）。")
 
 
 def cmd_remount_all() -> None:

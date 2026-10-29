@@ -24,7 +24,7 @@
 - **存储设备**：`mountvol /D` 摘盘符，审批通过后按 GUID 挂回
 - **非存储 USB 设备**：`Set-PnpDevice -Status Disabled` 禁用实例，审批通过后重新启用
 - **只读一档**：可以看、可以拷出来，不允许写回去（`diskpart attributes volume set readonly`）
-- **硬件指纹白名单**：对 `VID|PID|设备类|磁盘序列号` 做 SHA-256，比卷 GUID 难伪造得多
+- **硬件指纹白名单**：对 `VID|PID|设备类|磁盘序列号` 取 256 位摘要，比卷 GUID 难伪造得多
   （卷 GUID 一格式化就变）
 - **文件级审计**：放行后，该盘上的新建/修改/删除/改名通过 `ReadDirectoryChangesW` 记录
   （带节流，JSONL 格式）
@@ -75,7 +75,7 @@ remount-all.bat                     :: 放行所有仍被隔离的盘符（崩�
 python usb_guard.py --scan          :: 列出可移动卷及其指纹
 python usb_guard.py --status        :: 体检：权限 / 写保护 / 计划任务 / 白名单
 python usb_guard.py --instances     :: 列出运行中的实例
-python usb_guard.py --set-code      :: 设置授权口令（只存 SHA-256）
+python usb_guard.py --set-code      :: 设置授权口令（只存 256 位摘要）
 python usb_guard.py --harden        :: 开启基线写保护（需重新插拔生效）
 python usb_guard.py --unharden      :: 关闭基线写保护
 python usb_guard.py --lockdown      :: ACL 自我保护（挡标准用户，挡不住管理员）

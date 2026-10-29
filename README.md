@@ -28,8 +28,9 @@ deliberately don't offer. Devices sit quarantined (fail-closed) until a person d
 - **Non-storage USB devices** — PnP instance disabled via `Set-PnpDevice`, restored after approval
 - **Read-only release tier** — allow reading/copying out, block writing in
   (`diskpart attributes volume set readonly`)
-- **Hardware fingerprint whitelist** — SHA-256 over `VID|PID|device class|disk serial`,
-  far harder to spoof than volume GUIDs, which change on reformat
+- **Hardware fingerprint whitelist** — SHA-2 256-bit digest over
+  `VID|PID|device class|disk serial`, far harder to spoof than volume GUIDs,
+  which change on reformat
 - **File-level audit** — after release, create/modify/delete/rename on the drive is logged
   through `ReadDirectoryChangesW` (throttled, JSONL)
 - **Baseline write-protect** (optional) — `StorageDevicePolicies\WriteProtect=1`, so even
@@ -81,7 +82,7 @@ remount-all.bat                     :: release every drive still quarantined (af
 python usb_guard.py --scan          :: list removable volumes with fingerprints
 python usb_guard.py --status        :: health check: privileges / write-protect / task / whitelist
 python usb_guard.py --instances     :: list running guard instances
-python usb_guard.py --set-code      :: set an authorization code (only its SHA-256 is stored)
+python usb_guard.py --set-code      :: set an authorization code (only a SHA-2 256-bit digest is stored)
 python usb_guard.py --harden        :: enable baseline write-protect (re-plug to take effect)
 python usb_guard.py --unharden      :: disable it
 python usb_guard.py --lockdown      :: ACL self-protection (stops standard users, not admins)
